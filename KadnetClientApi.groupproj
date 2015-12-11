@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EC2B2F85-F07A-4442-83FC-6D63AA4ABE6D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="KadnetClient.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="KadnetClientApplicationExample.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="KadnetClient">
+        <MSBuild Projects="KadnetClient.cbproj"/>
+    </Target>
+    <Target Name="KadnetClient:Clean">
+        <MSBuild Projects="KadnetClient.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="KadnetClient:Make">
+        <MSBuild Projects="KadnetClient.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="KadnetClientApplicationExample">
+        <MSBuild Projects="KadnetClientApplicationExample.cbproj"/>
+    </Target>
+    <Target Name="KadnetClientApplicationExample:Clean">
+        <MSBuild Projects="KadnetClientApplicationExample.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="KadnetClientApplicationExample:Make">
+        <MSBuild Projects="KadnetClientApplicationExample.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="KadnetClient;KadnetClientApplicationExample"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="KadnetClient:Clean;KadnetClientApplicationExample:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="KadnetClient:Make;KadnetClientApplicationExample:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

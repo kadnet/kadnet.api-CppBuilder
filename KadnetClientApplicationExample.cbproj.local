@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.832,=D:\dev\!bitbucket\tools\kadnet.api Client C++Builder RAD\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.427,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClientApplicationExample.cbproj=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClientApplicationExample.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.838,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\General.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\General.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.699,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClientApplicationExamplePCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.703,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClientApplicationExample.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.061,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClientApplicationExamplePCH1.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClientApplicationExamplePCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.794,=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.656,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\General.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.183,=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\Win32\Debug\KadnetClient.lib</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.838,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\General.dfm=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\General.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.809,=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.838,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\General.cpp=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\General.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.656,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\General.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.656,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\General.h</Transaction>
+  </Transactions>
+</BorlandProject>
