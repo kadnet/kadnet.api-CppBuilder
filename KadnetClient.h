@@ -62,9 +62,7 @@ class KadnetApiClient
 	  ApiResponse CreateRequest(bool selfSigned,UnicodeString tariffId, UnicodeString kadNumber, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId);
 
 	  ApiResponse GetRequests(UnicodeString limitRequests, UnicodeString skipRequests);
-      ApiResponse GetRequest(UnicodeString requestId);
-
-
+	  ApiResponse GetRequest(UnicodeString requestId);
 	  UnicodeString GetToken();
    private:
 	  TIdHTTP* IdHTTPConnect;

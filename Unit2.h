@@ -23,7 +23,6 @@ __published:	// IDE-managed Components
 	TLabel *Label3;
 	TComboBox *ComboBox2;
 	TButton *Button1;
-	TSQLTable *SQLTable1;
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);

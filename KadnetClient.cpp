@@ -65,6 +65,9 @@ void KadnetApiClient::SetConnectionSettings ()
 	IdHTTPConnect->Request->Accept="application/json";
 	IdHTTPConnect->Request->CharSet="utf-8";
 	IdHTTPConnect->Request->CustomHeaders->FoldLines=false;
+	//индивидуальный для всех клиентов
+	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="MFjpY5JGHzWoCPzdl0RqJJBPcZPTZtUYTGHjW4mbbCW3MWZZZf/RuPtmLrnTqvRgdQVqXCeFzWXD1F92Hxn1R2Zez1nx1MCQfiRdIrHJeDtYPlHAcaAsMaMIYM4yH/AhltvVOokTcKftRQwy2hTv0g==";
+   //	IdHTTPConnect->Request->CustomHeaders->Values["software"]="DemoCppApp";
 	}
 	catch (Exception *ex)
 	{}

@@ -80,8 +80,4 @@ object Form2: TForm2
       TabOrder = 3
     end
   end
-  object SQLTable1: TSQLTable
-    Left = 504
-    Top = 320
-  end
 end

@@ -30,14 +30,14 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	else
 	{
 		Label1->Caption = "Не смог получить данные с сервера";
-    }
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
 	UnicodeString login = "testapi@kadnet.ru";
 	UnicodeString password = "Api2015test";
-	UnicodeString version = "CPPKadnetClient 0.0.1";
+	UnicodeString version = "DemoCppApp";
 
 	ApiResponse result = client.Auth(login,password,version);
 	Label2->Caption = client.GetToken();
