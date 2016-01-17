@@ -53,7 +53,8 @@ void ApiResponse::SetDate(UnicodeString str)
 
 KadnetApiClient::KadnetApiClient(){ url = "https://api.kadnet.ru/v1/";}
 KadnetApiClient::KadnetApiClient(TIdHTTP* IdHTTP){ IdHTTPConnect = IdHTTP; SetConnectionSettings();}  //самое полный конструктор, используй его.
-KadnetApiClient::KadnetApiClient(UnicodeString urlparam){ url = urlparam;}
+KadnetApiClient::KadnetApiClient(UnicodeString urlparam){ url = urlparam; }
+KadnetApiClient::KadnetApiClient(TIdHTTP* IdHTTP, UnicodeString tokenparam){ IdHTTPConnect = IdHTTP; SetConnectionSettings(); token=tokenparam;}
 
 void KadnetApiClient::SetConnectionSettings ()
 {
@@ -71,6 +72,14 @@ void KadnetApiClient::SetConnectionSettings ()
 	}
 	catch (Exception *ex)
 	{}
+}
+
+/*
+	Установка Token-а для KadnetClient
+*/
+void KadnetApiClient::SetToken (UnicodeString tokenparam)
+{
+	token = tokenparam;
 }
 
 /*

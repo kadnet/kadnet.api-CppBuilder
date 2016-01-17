@@ -99,3 +99,31 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::Button10Click(TObject *Sender)
+{
+	UnicodeString token = "";
+	/*
+	//Вариант 1. Читаем токен и передаем его в конструктор. Использовать при создании
+	//тут мы его, как будто прочитали из ini файла
+	//тут создаем объект, передавая данные в конструктор
+	client = KadnetApiClient(IdHTTP1,token);
+	*/
+
+	/**/
+	//Вариант 2. Тут мы устанавливаем токен к уже существующему объекту
+	client = KadnetApiClient(IdHTTP1);
+	client.SetToken(token);
+
+
+	ApiResponse result = client.TestConnection();
+	if (result.Result()) {
+	Label1->Caption = result.Data()+"\n"+result.Date();
+	}
+	else
+	{
+		Label1->Caption = "Не смог получить данные с сервера";
+	}
+	/**/
+}
+//---------------------------------------------------------------------------
+

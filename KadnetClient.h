@@ -47,6 +47,10 @@ class KadnetApiClient
 	  KadnetApiClient();
 	  KadnetApiClient(TIdHTTP* IdHTTPConnect);
 	  KadnetApiClient(UnicodeString url);
+	  KadnetApiClient(TIdHTTP* IdHTTPConnect, UnicodeString tokenparam);
+
+	  //установка токена
+	  void SetToken (UnicodeString tokenparam);
 
 	  ApiResponse TestConnection();
 	  ApiResponse Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software);
@@ -54,7 +58,7 @@ class KadnetApiClient
 	  ApiResponse GetObjectsTypes();
 	  ApiResponse GetRequestsTariffs();
 
-		  //Скачивание файла
+	  //Скачивание файла
 	  //TMemoryStream GetRequestContent(UnicodeString reqId); //так должно быть
 	  void GetRequestContent(UnicodeString reqId,UnicodeString format); //так чтобы протестить
 

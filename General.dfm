@@ -202,6 +202,21 @@ object Form1: TForm1
     TabOrder = 8
     OnClick = Button9Click
   end
+  object Button10: TButton
+    Left = 24
+    Top = 600
+    Width = 161
+    Height = 41
+    Caption = #1058#1077#1089#1090#1080#1088#1091#1077#1084' '#1079#1072#1075#1088#1091#1079#1082#1091' Token'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 9
+    OnClick = Button10Click
+  end
   object IdHTTP1: TIdHTTP
     AllowCookies = True
     ProxyParams.BasicAuthentication = False
