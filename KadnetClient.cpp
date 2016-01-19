@@ -265,6 +265,18 @@ ApiResponse KadnetApiClient::GetRequests(UnicodeString limitRequests, UnicodeStr
 	return response;
 }
 
+ApiResponse KadnetApiClient::GetRequests(UnicodeString requestTypeId, UnicodeString limitRequests, UnicodeString skipRequests)
+{
+	try{
+	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/GetRequestsByType/" + requestTypeId + "/" + limitRequests + "/" + skipRequests));
+	return response;
+	}
+	catch(Exception *ex)
+	{}
+	ApiResponse response;
+	return response;
+}
+
 ApiResponse KadnetApiClient::GetRequest(UnicodeString requestId)
 {
 try{
