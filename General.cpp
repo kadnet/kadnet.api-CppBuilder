@@ -115,7 +115,7 @@ void __fastcall TForm1::Button10Click(TObject *Sender)
 	client.SetToken(token);
 
 
-	ApiResponse result = client.TestConnection();
+	ApiResponse result = client.GetRequestsTariffs();
 	if (result.Result()) {
 	Label1->Caption = result.Data()+"\n"+result.Date();
 	}
