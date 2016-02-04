@@ -55,8 +55,10 @@ class KadnetApiClient
 	  ApiResponse TestConnection();
 	  ApiResponse Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software);
 	  ApiResponse GetRequestsTypes();
-	  ApiResponse GetObjectsTypes();
+	  ApiResponse GetObjectsTypesGkn();
+	  ApiResponse GetObjectsTypesEgrp();
 	  ApiResponse GetRequestsTariffs();
+	  ApiResponse GetRegions();
 
 	  //Скачивание файла
 	  //TMemoryStream GetRequestContent(UnicodeString reqId); //так должно быть
@@ -76,6 +78,12 @@ class KadnetApiClient
 	  void SetConnectionSettings();
 };
 
+class Tools
+{
+	public:
+		static int Test();
+		static UnicodeString PrintJSON(UnicodeString json);
+};
 
 #endif
 

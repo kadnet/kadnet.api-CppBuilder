@@ -12,10 +12,8 @@ ApiResponse::ApiResponse (UnicodeString json) {
    TJSONObject *JSON = (TJSONObject*)TJSONObject::ParseJSONValue(json);
    TJSONPair *data = JSON->Get("Data");
    __data = data->JsonValue->ToString();
-   __data = StringReplace( __data, "\"", "", TReplaceFlags() <<rfReplaceAll );
    TJSONPair *date = JSON->Get("Date");
    __date = date->JsonValue->ToString();
-   __date = StringReplace( __date, "\"", "", TReplaceFlags() <<rfReplaceAll );
    TJSONPair *res = JSON->Get("Result");
    SetResult(res->JsonValue->ToString());
 	}
@@ -67,8 +65,7 @@ void KadnetApiClient::SetConnectionSettings ()
 	IdHTTPConnect->Request->CharSet="utf-8";
 	IdHTTPConnect->Request->CustomHeaders->FoldLines=false;
 	//индивидуальный для всех клиентов
-	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="MFjpY5JGHzWoCPzdl0RqJJBPcZPTZtUYTGHjW4mbbCW3MWZZZf/RuPtmLrnTqvRgdQVqXCeFzWXD1F92Hxn1R2Zez1nx1MCQfiRdIrHJeDtYPlHAcaAsMaMIYM4yH/AhltvVOokTcKftRQwy2hTv0g==";
-   //	IdHTTPConnect->Request->CustomHeaders->Values["software"]="DemoCppApp";
+	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="";
 	}
 	catch (Exception *ex)
 	{}
@@ -124,7 +121,8 @@ ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, U
 
 	ApiResponse response = ApiResponse(answer->DataString);
 	if (response.Result()) {
-			token = response.Data();
+			//token = response.Data();
+			token = StringReplace(response.Data(), "\"", "", TReplaceFlags() <<rfReplaceAll );
 			IdHTTPConnect->Request->CustomHeaders->Values["Authorization"]=token;
 	}
 	return response;
@@ -155,9 +153,9 @@ ApiResponse KadnetApiClient::GetRequestsTypes()
 	Получить данные о типах объектов
 	Тут информация об объектах, на которые мы запрашиваем информацию: квартира, помещение, здание, учестов и т.п.
 */
-ApiResponse KadnetApiClient::GetObjectsTypes()
+ApiResponse KadnetApiClient::GetObjectsTypesGkn()
 {   try{
-	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/Objects"));
+	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/ObjectsGkn"));
 	return response;
 	}
 	catch(Exception *ex)
@@ -166,6 +164,16 @@ ApiResponse KadnetApiClient::GetObjectsTypes()
 	return response;
 }
 
+ApiResponse KadnetApiClient::GetObjectsTypesEgrp()
+{   try{
+	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/ObjectsEgrp"));
+	return response;
+	}
+	catch(Exception *ex)
+	{}
+	ApiResponse response;
+	return response;
+}
 /*********************************************************************************
 	Получить данные о тарифах
 	У каждого запроса должен быть тариф, по нему определяется, сколько средств будет списано у пользователя, как будет сделан запрос
@@ -176,11 +184,28 @@ ApiResponse KadnetApiClient::GetRequestsTariffs()
 	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/Tariffs"));
 	return response;
 	}
-    	catch(Exception *ex)
+		catch(Exception *ex)
 	{}
 	ApiResponse response;
 	return response;
 }
+
+/*********************************************************************************
+	Получить данные о регионах
+*/
+ApiResponse KadnetApiClient::GetRegions()
+{
+	try{
+		ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/Regions"));
+			return response;
+	}
+		catch(Exception *ex)
+	{}
+	ApiResponse response;
+	return response;
+}
+
+
 
 /*
 	Получить результаты запроса
@@ -209,7 +234,13 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 	try{
 	 TMemoryStream *result = new TMemoryStream();
 	TJSONObject *myjson = new TJSONObject();
-	myjson->AddPair("kadNumber",kadNumbers);
+	/*
+					kadNubmers = kadNubmers,
+				comment = comment,
+				requestsTypeId = requestsTypeId,
+				objectTypeId = objectTypeId
+*/
+	myjson->AddPair("kadNubmers",kadNumbers);
 	myjson->AddPair("comment",comment);
 	myjson->AddPair("requestsTypeId",requestTypeId);
 	myjson->AddPair("objectTypeId",objectTypeId);
@@ -234,7 +265,7 @@ ApiResponse KadnetApiClient::CreateRequest(bool selfSigned, UnicodeString tariff
 	TMemoryStream *result = new TMemoryStream();
 	TJSONObject *myjson = new TJSONObject();
 	myjson->AddPair("selfSigned",selfSigned?"true":"false");
-	myjson->AddPair("kadNumber",kadNumber);
+	myjson->AddPair("kadNubmers",kadNumber);
 	myjson->AddPair("comment",comment);
 	myjson->AddPair("requestsTypeId",requestTypeId);
 	myjson->AddPair("objectTypeId",objectTypeId);
@@ -292,3 +323,32 @@ try{
 /*	Получить token сохраненный в клиенте*/
 UnicodeString KadnetApiClient::GetToken() { return token; }
 
+int Tools::Test()
+{
+	return 1;
+}
+
+UnicodeString Tools::PrintJSON(UnicodeString json)
+{
+	UnicodeString result;
+	TJSONArray* JSON = (TJSONArray*)TJSONObject::ParseJSONValue(json); //преобразуем строку в JSON объект
+	int count = JSON->Count;
+	result = "JSONCount = " + count;                                          //Смотрим сколько объектов в json-е
+	for (int i=0; i < count; i++) {                                    //будем переберать каждый объект
+		TJSONValue* oneEntry = JSON->Get(i);                           //выбираем один объект
+		TJSONArray*  objProperties =  (TJSONArray*)oneEntry;                 //находим все его своства
+	   //	int len = objProperties->Count;                                      //Сейчас будем перебирать все свойства
+	   //	for (int k=0; k < len; k++) {
+	   //		TJSONValue *oneProperty = objProperties->Get(k);                //получить одно свойство
+	   //		result = oneProperty->Value();                             //получить его значение
+	   //	}
+	}
+	return "count="+UnicodeString(count)+"\t"+result;
+/*	try{
+		TJSONObject *JSON = (TJSONObject*)TJSONObject::ParseJSONValue(json); //преобразуем строку в JSON объект
+		int size = JSON->Size(); //получаем количество объектов в JSON
+	}
+	catch (Exception *ex)
+	{}
+	return "OK";*/
+}
