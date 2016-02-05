@@ -240,7 +240,7 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 				requestsTypeId = requestsTypeId,
 				objectTypeId = objectTypeId
 */
-	myjson->AddPair("kadNubmers",kadNumbers);
+	myjson->AddPair("kadNumbers",kadNumbers);
 	myjson->AddPair("comment",comment);
 	myjson->AddPair("requestsTypeId",requestTypeId);
 	myjson->AddPair("objectTypeId",objectTypeId);
@@ -265,7 +265,7 @@ ApiResponse KadnetApiClient::CreateRequest(bool selfSigned, UnicodeString tariff
 	TMemoryStream *result = new TMemoryStream();
 	TJSONObject *myjson = new TJSONObject();
 	myjson->AddPair("selfSigned",selfSigned?"true":"false");
-	myjson->AddPair("kadNubmers",kadNumber);
+	myjson->AddPair("kadNumbers",kadNumber);
 	myjson->AddPair("comment",comment);
 	myjson->AddPair("requestsTypeId",requestTypeId);
 	myjson->AddPair("objectTypeId",objectTypeId);
