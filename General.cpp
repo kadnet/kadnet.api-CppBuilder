@@ -70,7 +70,7 @@ void __fastcall TForm1::Button5Click(TObject *Sender)
 
 void __fastcall TForm1::Button6Click(TObject *Sender)
 {
-	ApiResponse checkReq = client.CheckRequests("24:50:0000000:58340;24:50:0000000:58360-58365","xxx","6aa0e204-4d11-4e97-8348-1c2d9bce3655","00000000-0000-0000-0000-000000000000");
+	ApiResponse checkReq = client.CheckRequests("24:50:0000000:58340;24:50:0000000:58360-58365","ÿÿÿ","6aa0e204-4d11-4e97-8348-1c2d9bce3655","00000000-0000-0000-0000-000000000000");
 	Label6->Caption = checkReq.Data();
 }
 //---------------------------------------------------------------------------

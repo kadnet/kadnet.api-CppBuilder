@@ -332,7 +332,7 @@ UnicodeString Tools::PrintJSON(UnicodeString json)
 {
 	UnicodeString result;
 	TJSONArray* JSON = (TJSONArray*)TJSONObject::ParseJSONValue(json); //преобразуем строку в JSON объект
-	int count = JSON->Count;
+	int count = JSON->Size();
 	result = "JSONCount = " + count;                                          //Смотрим сколько объектов в json-е
 	for (int i=0; i < count; i++) {                                    //будем переберать каждый объект
 		TJSONValue* oneEntry = JSON->Get(i);                           //выбираем один объект
