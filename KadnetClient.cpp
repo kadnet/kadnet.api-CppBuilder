@@ -66,7 +66,7 @@ void KadnetApiClient::SetConnectionSettings ()
 	IdHTTPConnect->Request->CharSet="utf-8";
 	IdHTTPConnect->Request->CustomHeaders->FoldLines=false;
 	//индивидуальный для всех клиентов
-	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="MFjpY5JGHzWoCPzdl0RqJJBPcZPTZtUYTGHjW4mbbCW3MWZZZf/RuPtmLrnTqvRgdQVqXCeFzWXD1F92Hxn1R2Zez1nx1MCQfiRdIrHJeDtYPlHAcaAsMaMIYM4yH/AhltvVOokTcKftRQwy2hTv0g==";
+	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="";
 	}
 	catch (Exception *ex)
 	{}
@@ -328,6 +328,24 @@ ApiResponse KadnetApiClient::GetRequestHistory(UnicodeString requestId)
 	return response;
 }
 
+ApiResponse KadnetApiClient::DeleteRequest(UnicodeString requestId)
+{
+	 try{
+		 TMemoryStream *result = new TMemoryStream();
+		 IdHTTPConnect->Delete("https://api.kadnet.ru/v1/Requests/DeleteRequest/" + requestId,result);
+		 result->Position=0;
+		 TStringStream *answer = new TStringStream();
+		 answer->CopyFrom(result,result->Size);
+
+		 ApiResponse response = ApiResponse(answer->DataString);
+		 return response;
+	}
+	catch(Exception *ex)
+	{}
+	ApiResponse response;
+	return response;
+}
+
 ApiResponse KadnetApiClient::GetRequestsToSign()
 {
 	 try{
@@ -362,7 +380,6 @@ ApiResponse KadnetApiClient::SaveSign(UnicodeString requestId, UnicodeString sig
 	ApiResponse response;
 	return response;
 }
-
 
 /*	Получить token сохраненный в клиенте*/
 UnicodeString KadnetApiClient::GetToken() { return token; }

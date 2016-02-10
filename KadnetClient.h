@@ -72,6 +72,7 @@ class KadnetApiClient
 	  ApiResponse GetRequestsByType(UnicodeString requestType, UnicodeString limitRequests, UnicodeString skipRequests);
 	  ApiResponse GetRequest(UnicodeString requestId);
 	  ApiResponse GetRequestHistory(UnicodeString requestId);
+	  ApiResponse DeleteRequest(UnicodeString requestId);
 
 	  //Работа с подписью
 	  ApiResponse GetRequestsToSign();
