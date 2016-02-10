@@ -16,6 +16,7 @@ ApiResponse::ApiResponse (UnicodeString json) {
    __date = date->JsonValue->ToString();
    TJSONPair *res = JSON->Get("Result");
    SetResult(res->JsonValue->ToString());
+
 	}
 	catch (Exception *ex)
 	{}
@@ -65,7 +66,7 @@ void KadnetApiClient::SetConnectionSettings ()
 	IdHTTPConnect->Request->CharSet="utf-8";
 	IdHTTPConnect->Request->CustomHeaders->FoldLines=false;
 	//индивидуальный для всех клиентов
-	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="";
+	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="MFjpY5JGHzWoCPzdl0RqJJBPcZPTZtUYTGHjW4mbbCW3MWZZZf/RuPtmLrnTqvRgdQVqXCeFzWXD1F92Hxn1R2Zez1nx1MCQfiRdIrHJeDtYPlHAcaAsMaMIYM4yH/AhltvVOokTcKftRQwy2hTv0g==";
 	}
 	catch (Exception *ex)
 	{}
@@ -234,12 +235,6 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 	try{
 	 TMemoryStream *result = new TMemoryStream();
 	TJSONObject *myjson = new TJSONObject();
-	/*
-					kadNubmers = kadNubmers,
-				comment = comment,
-				requestsTypeId = requestsTypeId,
-				objectTypeId = objectTypeId
-*/
 	myjson->AddPair("kadNumbers",kadNumbers);
 	myjson->AddPair("comment",comment);
 	myjson->AddPair("requestsTypeId",requestTypeId);
@@ -265,7 +260,7 @@ ApiResponse KadnetApiClient::CreateRequest(bool selfSigned, UnicodeString tariff
 	TMemoryStream *result = new TMemoryStream();
 	TJSONObject *myjson = new TJSONObject();
 	myjson->AddPair("selfSigned",selfSigned?"true":"false");
-	myjson->AddPair("kadNumbers",kadNumber);
+	myjson->AddPair("kadNumber",kadNumber);
 	myjson->AddPair("comment",comment);
 	myjson->AddPair("requestsTypeId",requestTypeId);
 	myjson->AddPair("objectTypeId",objectTypeId);
@@ -297,10 +292,10 @@ ApiResponse KadnetApiClient::GetRequests(UnicodeString limitRequests, UnicodeStr
 	return response;
 }
 
-ApiResponse KadnetApiClient::GetRequests(UnicodeString requestTypeId, UnicodeString limitRequests, UnicodeString skipRequests)
+ApiResponse KadnetApiClient::GetRequestsByType(UnicodeString requestType, UnicodeString limitRequests, UnicodeString skipRequests)
 {
 	try{
-	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/GetRequestsByType/" + requestTypeId + "/" + limitRequests + "/" + skipRequests));
+	ApiResponse response = ApiResponse(IdHTTPConnect->Get(TIdURI::URLEncode("https://api.kadnet.ru/v1/Requests/GetRequestsByType/" + requestType + "/" + limitRequests + "/" + skipRequests)));
 	return response;
 	}
 	catch(Exception *ex)
@@ -320,6 +315,55 @@ try{
 	ApiResponse response;
 	return response;
 }
+
+ApiResponse KadnetApiClient::GetRequestHistory(UnicodeString requestId)
+{
+     try{
+	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/GetRequestHistory/" + requestId));
+	return response;
+	}
+	catch(Exception *ex)
+	{}
+	ApiResponse response;
+	return response;
+}
+
+ApiResponse KadnetApiClient::GetRequestsToSign()
+{
+	 try{
+	ApiResponse response = ApiResponse(IdHTTPConnect->Get("https://api.kadnet.ru/v1/Requests/GetRequestsToSign/"));
+	return response;
+	}
+	catch(Exception *ex){}
+	ApiResponse response;
+	return response;
+}
+
+ApiResponse KadnetApiClient::SaveSign(UnicodeString requestId, UnicodeString signContent, UnicodeString certContent, UnicodeString cpVersion)
+{
+    try{
+	TMemoryStream *result = new TMemoryStream();
+	TJSONObject *myjson = new TJSONObject();
+	myjson->AddPair("requestId",requestId);
+	myjson->AddPair("signContent",signContent);
+	myjson->AddPair("certContent",certContent);
+	myjson->AddPair("cpVersion",cpVersion);
+	TStringStream *params = new TStringStream(myjson->ToString());
+	IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/SaveSign",params,result);
+	result->Position=0;
+	TStringStream *answer = new TStringStream();
+	answer->CopyFrom(result,result->Size);
+
+	ApiResponse response = ApiResponse(answer->DataString);
+	return response;
+	}
+	catch(Exception *ex)
+	{}
+	ApiResponse response;
+	return response;
+}
+
+
 /*	Получить token сохраненный в клиенте*/
 UnicodeString KadnetApiClient::GetToken() { return token; }
 

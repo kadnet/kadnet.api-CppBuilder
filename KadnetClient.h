@@ -12,6 +12,7 @@
 #include <IdHTTP.hpp>
 #include <IdTCPClient.hpp>
 #include <IdTCPConnection.hpp>
+#include <IdURI.hpp>
 #include <IdSSLOpenSSL.hpp>          ////Add by Kadnet
 #include <DBXJSON.hpp>
 class ApiResponse
@@ -68,8 +69,15 @@ class KadnetApiClient
 	  ApiResponse CreateRequest(bool selfSigned,UnicodeString tariffId, UnicodeString kadNumber, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId);
 
 	  ApiResponse GetRequests(UnicodeString limitRequests, UnicodeString skipRequests);
-	  ApiResponse GetRequests(UnicodeString requestTypeId, UnicodeString limitRequests, UnicodeString skipRequests);
+	  ApiResponse GetRequestsByType(UnicodeString requestType, UnicodeString limitRequests, UnicodeString skipRequests);
 	  ApiResponse GetRequest(UnicodeString requestId);
+	  ApiResponse GetRequestHistory(UnicodeString requestId);
+
+	  //Работа с подписью
+	  ApiResponse GetRequestsToSign();
+	  ApiResponse SaveSign(UnicodeString requestId, UnicodeString signContent, UnicodeString certContent, UnicodeString cpVersion);
+
+
 	  UnicodeString GetToken();
    private:
 	  TIdHTTP* IdHTTPConnect;
