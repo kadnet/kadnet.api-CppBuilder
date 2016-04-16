@@ -58,15 +58,19 @@ class KadnetApiClient
 	  ApiResponse GetRequestsTypes();
 	  ApiResponse GetObjectsTypesGkn();
 	  ApiResponse GetObjectsTypesEgrp();
-	  ApiResponse GetRequestsTariffs();
+	  ApiResponse GetRequestsTariffs(UnicodeString tariffId);
 	  ApiResponse GetRegions();
 
-	  //Скачивание файла
-	  //TMemoryStream GetRequestContent(UnicodeString reqId); //так должно быть
-	  void GetRequestContent(UnicodeString reqId,UnicodeString format); //так чтобы протестить
+	  //Получение результата
+	  TMemoryStream* GetRequestContent(UnicodeString reqId,UnicodeString format);
 
+	  //Получить Xml-запроса на подпись
+	  AnsiString GetRequestBody(UnicodeString reqId); //Получение xml запроса
+	  ApiResponse GetRequestBodyBase64(UnicodeString reqId); //Получение xml запроса
+
+	  //Проверка и создание запроса
 	  ApiResponse CheckRequests(UnicodeString kadNumbers, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId);
-	  ApiResponse CreateRequest(bool selfSigned,UnicodeString tariffId, UnicodeString kadNumber, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId);
+	  ApiResponse CreateRequest(bool selfSigned,UnicodeString tariffCode, UnicodeString kadNumber, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId);
 
 	  ApiResponse GetRequests(UnicodeString limitRequests, UnicodeString skipRequests);
 	  ApiResponse GetRequestsByType(UnicodeString requestType, UnicodeString limitRequests, UnicodeString skipRequests);
@@ -77,7 +81,8 @@ class KadnetApiClient
 	  //Работа с подписью
 	  ApiResponse GetRequestsToSign();
 	  ApiResponse SaveSign(UnicodeString requestId, UnicodeString signContent, UnicodeString certContent, UnicodeString cpVersion);
-
+	  ApiResponse SaveSign(UnicodeString requestId, AnsiString signContent, AnsiString certContent, UnicodeString cpVersion);
+	  ApiResponse SaveSign(UnicodeString requestId, unsigned char signContent, int signContentLenght, unsigned char certContent, int certContentLenght, UnicodeString cpVersion);
 
 	  UnicodeString GetToken();
    private:

@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.144,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClient.cbproj=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.274,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cpp=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClient.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.144,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cbproj=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClient.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.517,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\File2.cpp=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.466,=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\File2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.471,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\File1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.848,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cbproj=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.274,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClient.cpp=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.107,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClient.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.828,=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\File1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.517,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cpp=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\File2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.471,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\File1.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.107,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.h=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\newKadnetClient\KadnetClient.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.848,C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\Dmitry\Documents\Embarcadero\Studio\Projects\KadnetClient.cbproj</Transaction>
   </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="KadnetClient.cpp"/>
+    <File Path="KadnetClient.h"/>
+  </ProjectSortOrder>
 </BorlandProject>

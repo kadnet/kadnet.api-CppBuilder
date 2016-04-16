@@ -217,6 +217,15 @@ object Form1: TForm1
     TabOrder = 9
     OnClick = Button10Click
   end
+  object Button11: TButton
+    Left = 24
+    Top = 664
+    Width = 161
+    Height = 41
+    Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1092#1072#1081#1083' '#1086#1090#1074#1077#1090#1072
+    TabOrder = 10
+    OnClick = Button11Click
+  end
   object IdHTTP1: TIdHTTP
     AllowCookies = True
     ProxyParams.BasicAuthentication = False
