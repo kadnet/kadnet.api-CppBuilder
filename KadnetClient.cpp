@@ -126,23 +126,25 @@ ApiResponse KadnetApiClient::TestConnection(){
 */
 ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software){
 	try{
-		TMemoryStream *result = 0;
 		TJSONObject *myjson = 0;
+		TStringStream *params = 0;
 		TStringStream *answer = 0;
 		try
 		{
-			result = new TMemoryStream();
 			myjson = new TJSONObject();
-			if (result && myjson)
+			if (myjson)
 			{
 				myjson->AddPair("login",Login);
 				myjson->AddPair("password",Password);
 				myjson->AddPair("software",Software);
-				TStringStream *params = new TStringStream(myjson->ToString());
-				IdHTTPConnect->Post("https://api.kadnet.ru/v1/auth",params,result);
-				result->Position=0;
-				answer = new TStringStream();
-				answer->CopyFrom(result,result->Size);
+
+				TEncoding *LEncoding = NULL;
+				params = new TStringStream(myjson->ToString(),LEncoding->UTF8,false);
+
+				UnicodeString empty;
+				answer = new TStringStream(empty,LEncoding->UTF8,false);
+
+				IdHTTPConnect->Post("https://api.kadnet.ru/v1/auth",params,answer);
 
 				ApiResponse response = ApiResponse(answer->DataString);
 				if (response.Result()) {
@@ -151,19 +153,25 @@ ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, U
 				}
 				delete myjson;
 				delete answer;
-				delete result;
+				delete params;
 				return response;
 			}
 		}
 		catch (Exception *ex)
 		{
-			if (myjson && result)
+			if (myjson)
 			{
 				delete myjson;
-				delete result;
-				delete answer;
 				myjson = 0;
-				result = 0;
+			}
+			if (params)
+			{
+				delete params;
+				params = 0;
+			}
+			if (answer)
+			{
+				delete answer;
 				answer = 0;
 			}
 		}
@@ -282,6 +290,9 @@ TMemoryStream* KadnetApiClient::GetRequestContent(UnicodeString reqId, UnicodeSt
 	{}
 }
 
+/*******************************************************************************
+	Получить XML запроса в виде AnsiString
+*/
 AnsiString KadnetApiClient::GetRequestBody(UnicodeString reqId)
 {
 	 try{
@@ -295,6 +306,10 @@ AnsiString KadnetApiClient::GetRequestBody(UnicodeString reqId)
 	{}
 }
 
+/*******************************************************************************
+	Получить XML запроса в виде Base64
+	Используется для подписи в Панораме
+*/
 ApiResponse KadnetApiClient::GetRequestBodyBase64(UnicodeString reqId)
 {
 	try{
@@ -315,25 +330,24 @@ ApiResponse KadnetApiClient::GetRequestBodyBase64(UnicodeString reqId)
 ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId)
 {
 	try{
-		TMemoryStream *result = 0;
 		TJSONObject *myjson = 0;
 		TStringStream *params = 0;
 		TStringStream *answer = 0;
 		try {
-			result = new TMemoryStream();
 			myjson = new TJSONObject();
 			myjson->AddPair("kadNumbers",kadNumbers);
 			myjson->AddPair("comment",comment);
 			myjson->AddPair("requestsTypeId",requestTypeId);
 			myjson->AddPair("objectTypeId",objectTypeId);
-			params = new TStringStream(myjson->ToString());
-			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/Check",params,result);
-			result->Position=0;
-			answer = new TStringStream();
-			answer->CopyFrom(result,result->Size);
+			TEncoding *LEncoding = NULL;
+			params = new TStringStream(myjson->ToString(),LEncoding->UTF8,false);
+
+			UnicodeString empty;
+			TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
+
+			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/Check",params,answer);
 			ApiResponse response = ApiResponse(answer->DataString);
 
-			delete result;
 			delete myjson;
 			delete params;
 			delete answer;
@@ -341,10 +355,6 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 			return response;
 
 		} catch (Exception *ex) {
-			if (result) {
-				delete result;
-				result = 0;
-			}
 			if (myjson) {
 				delete myjson;
 				myjson = 0;
@@ -371,14 +381,11 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 ApiResponse KadnetApiClient::CreateRequest(bool selfSigned, UnicodeString tariffCode, UnicodeString kadNumber, UnicodeString comment, UnicodeString requestTypeId, UnicodeString objectTypeId)
 {
 	try{
-		TMemoryStream *result = 0;
 		TJSONObject *myjson = 0;
 		TStringStream *params = 0;
 		TStringStream *answer = 0;
 		try{
-			result = new TMemoryStream();
 			myjson = new TJSONObject();
-
 			myjson->AddPair("selfSigned",selfSigned?"true":"false");
 			myjson->AddPair("kadNumber",kadNumber);
 			myjson->AddPair("comment",comment);
@@ -386,26 +393,22 @@ ApiResponse KadnetApiClient::CreateRequest(bool selfSigned, UnicodeString tariff
 			myjson->AddPair("objectTypeId",objectTypeId);
 			myjson->AddPair("tariffCode", tariffCode);
 
-			params = new TStringStream(myjson->ToString());
+			TEncoding *LEncoding = NULL;
+			params = new TStringStream(myjson->ToString(),LEncoding->UTF8,false);
 
-			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/Create",params,result);
-			result->Position=0;
+			UnicodeString empty;
+			TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
 
-			answer = new TStringStream();
-			answer->CopyFrom(result,result->Size);
+			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/Create",params,answer);
+
 			ApiResponse response = ApiResponse(answer->DataString);
 
-			delete result;
 			delete myjson;
 			delete params;
 			delete answer;
 
 			return response;
 		} catch (Exception *ex) {
-			if (result) {
-				delete result;
-				result = 0;
-			}
 			if (myjson) {
 				delete myjson;
 				myjson = 0;
@@ -497,27 +500,19 @@ ApiResponse KadnetApiClient::GetRequestHistory(UnicodeString requestId)
 ApiResponse KadnetApiClient::DeleteRequest(UnicodeString requestId)
 {
 	 try{
-		 TMemoryStream *result = 0;
 		 TStringStream *answer = 0;
 		 try{
-			 result = new TMemoryStream();
-			 IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/DeleteRequest/" + requestId,result);
-			 result->Position=0;
+			 UnicodeString empty;
+			 TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
 
-			 answer = new TStringStream();
-			 answer->CopyFrom(result,result->Size);
+			 IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/DeleteRequest/" + requestId,answer);
+
 			 ApiResponse response = ApiResponse(answer->DataString);
 
-			 delete result;
 			 delete answer;
-
 			 return response;
 
 		} catch (Exception *ex) {
-			if (result) {
-				delete result;
-				result = 0;
-			}
 			if (answer) {
 				delete answer;
 				answer = 0;
@@ -619,10 +614,11 @@ ApiResponse KadnetApiClient::SaveSign(UnicodeString requestId, UnicodeString sig
 			myjson->AddPair("signContent",signContent);
 			myjson->AddPair("certContent",certContent);
 			myjson->AddPair("cpVersion",cpVersion);
+
 			TEncoding *LEncoding = NULL;
-			UnicodeString empty = 0;
 
 			TStringStream *params = new TStringStream(myjson->ToString(),LEncoding->UTF8,false);
+            UnicodeString empty = 0;
 			TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
 
 			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/SaveSign",params,answer);
