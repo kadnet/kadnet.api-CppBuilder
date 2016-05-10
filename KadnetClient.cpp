@@ -151,6 +151,7 @@ ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, U
 					token = StringReplace(response.Data(), "\"", "", TReplaceFlags() <<rfReplaceAll );
 					IdHTTPConnect->Request->CustomHeaders->Values["Authorization"]=token;
 				}
+				delete LEncoding;
 				delete myjson;
 				delete answer;
 				delete params;
@@ -292,6 +293,7 @@ TMemoryStream* KadnetApiClient::GetRequestContent(UnicodeString reqId, UnicodeSt
 
 /*******************************************************************************
 	Ïîëó÷èòü XML çàïðîñà â âèäå AnsiString
+	ÍÅ ÈÑÏÎËÜÇÓÅÒÑß!!!
 */
 AnsiString KadnetApiClient::GetRequestBody(UnicodeString reqId)
 {
@@ -300,6 +302,7 @@ AnsiString KadnetApiClient::GetRequestBody(UnicodeString reqId)
 		TEncoding *LEncoding = NULL;
 		TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
 		IdHTTPConnect->Get("https://api.kadnet.ru/v1//Requests/GetRequestBody/" + reqId,answer);
+		delete LEncoding;
 		return answer->DataString.Trim();
 	}
 	catch(Exception *ex)
@@ -348,6 +351,7 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/Check",params,answer);
 			ApiResponse response = ApiResponse(answer->DataString);
 
+			delete LEncoding;
 			delete myjson;
 			delete params;
 			delete answer;
@@ -403,6 +407,7 @@ ApiResponse KadnetApiClient::CreateRequest(bool selfSigned, UnicodeString tariff
 
 			ApiResponse response = ApiResponse(answer->DataString);
 
+			delete LEncoding;
 			delete myjson;
 			delete params;
 			delete answer;
@@ -503,12 +508,14 @@ ApiResponse KadnetApiClient::DeleteRequest(UnicodeString requestId)
 		 TStringStream *answer = 0;
 		 try{
 			 UnicodeString empty;
+			 TEncoding *LEncoding = NULL;
 			 TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
 
-			 IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/DeleteRequest/" + requestId,answer);
+			 IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/Delete/" + requestId, answer);
 
 			 ApiResponse response = ApiResponse(answer->DataString);
 
+			 delete LEncoding;
 			 delete answer;
 			 return response;
 
@@ -618,7 +625,7 @@ ApiResponse KadnetApiClient::SaveSign(UnicodeString requestId, UnicodeString sig
 			TEncoding *LEncoding = NULL;
 
 			TStringStream *params = new TStringStream(myjson->ToString(),LEncoding->UTF8,false);
-            UnicodeString empty = 0;
+			UnicodeString empty = 0;
 			TStringStream *answer = new TStringStream(empty,LEncoding->UTF8,false);
 
 			IdHTTPConnect->Post("https://api.kadnet.ru/v1/Requests/SaveSign",params,answer);
