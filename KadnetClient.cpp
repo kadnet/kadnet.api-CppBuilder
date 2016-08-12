@@ -1,3 +1,17 @@
+/* KadnetClient.cpp **** Balandin D.V. [dmitry@kadnet.ru]    12/08/16
+
+			  Copyright (c) KADNET 2014-2016
+					  All Rights Reserved
+
+********************************************************************
+
+				FOR WIN32S , WINDOWS95 & WINDOWS NT
+
+********************************************************************
+
+	           Библиотека для работы с api.kadnet.ru
+
+*******************************************************************/
 #include "KadnetClient.h"
 //---- ApiResponce class -------------------------------------------------------
 ApiResponse::ApiResponse () {

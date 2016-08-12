@@ -111,6 +111,7 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <_TCHARMapping>wchar_t</_TCHARMapping>
         <VerInfo_Locale>1049</VerInfo_Locale>
         <Manifest_File>None</Manifest_File>
     </PropertyGroup>
