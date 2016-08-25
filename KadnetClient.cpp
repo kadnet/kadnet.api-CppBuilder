@@ -91,7 +91,7 @@ void KadnetApiClient::SetConnectionSettings ()
 	try{
 	TIdSSLIOHandlerSocketOpenSSL *ssl= new TIdSSLIOHandlerSocketOpenSSL(NULL);
 	IdHTTPConnect->IOHandler = ssl;
-	IdHTTPConnect->ReadTimeout=6000;
+	IdHTTPConnect->ReadTimeout=30000;
 	IdHTTPConnect->Request->ContentType="application/json";
 	IdHTTPConnect->Request->Accept="application/json";
 	IdHTTPConnect->Request->CharSet="utf-8";
@@ -351,7 +351,7 @@ ApiResponse KadnetApiClient::CheckRequests(UnicodeString kadNumbers, UnicodeStri
 		TStringStream *params = 0;
 		TStringStream *answer = 0;
 		try {
-			myjson = new TJSONObject();
+ 			myjson = new TJSONObject();
 			myjson->AddPair("kadNumbers",kadNumbers);
 			myjson->AddPair("comment",comment);
 			myjson->AddPair("requestsTypeId",requestTypeId);
