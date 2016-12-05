@@ -22,7 +22,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-	client = KadnetApiClient(IdHTTP1); //Ѕоже мой,какой костыль! будь ты прокл€т C++Builder
+	client = KadnetApiClient(IdHTTP1);
 	ApiResponse result = client.TestConnection();
 	if (result.Result()) {
 	Label1->Caption = result.Data()+"\n"+result.Date();
@@ -38,9 +38,10 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 {
 	UnicodeString login = "testapi@kadnet.ru";
 	UnicodeString password = "Api2015test";
-	UnicodeString version = "DemoCppApp";
+	UnicodeString software = "DemoCppApp";
+	UnicodeString softwareVersion = "0.1.1";
 
-	ApiResponse result = client.Auth(login,password,version);
+	ApiResponse result = client.Auth(login,password,software,softwareVersion);
 	Label2->Caption = client.GetToken();
 }
 //---------------------------------------------------------------------------

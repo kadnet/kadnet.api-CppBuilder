@@ -69,7 +69,7 @@ class KadnetApiClient
 	  void SetToken (UnicodeString tokenparam);
 
 	  ApiResponse TestConnection();
-	  ApiResponse Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software);
+	  ApiResponse Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software, UnicodeString SoftwareVersion);
 	  ApiResponse GetRequestsTypes();
 	  ApiResponse GetObjectsTypesGkn();
 	  ApiResponse GetObjectsTypesEgrp();

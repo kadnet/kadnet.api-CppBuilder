@@ -91,11 +91,12 @@ void KadnetApiClient::SetConnectionSettings ()
 	try{
 	TIdSSLIOHandlerSocketOpenSSL *ssl= new TIdSSLIOHandlerSocketOpenSSL(NULL);
 	IdHTTPConnect->IOHandler = ssl;
-	IdHTTPConnect->ReadTimeout=30000;
+	IdHTTPConnect->ReadTimeout=60000;
 	IdHTTPConnect->Request->ContentType="application/json";
 	IdHTTPConnect->Request->Accept="application/json";
 	IdHTTPConnect->Request->CharSet="utf-8";
 	IdHTTPConnect->Request->CustomHeaders->FoldLines=false;
+	IdHTTPConnect->HandleRedirects =1;
 	//Api-Key èíäèâèäóàëüíûé äëÿ âñåõ êëèåíòîâ
 	IdHTTPConnect->Request->CustomHeaders->Values["Api-Key"]="MFjpY5JGHzWoCPzdl0RqJJBPcZPTZtUYTGHjW4mbbCW3MWZZZf/RuPtmLrnTqvRgdQVqXCeFzWXD1F92Hxn1R2Zez1nx1MCQfiRdIrHJeDtYPlHAcaAsMaMIYM4yH/AhltvVOokTcKftRQwy2hTv0g==";
 	}
@@ -138,7 +139,7 @@ ApiResponse KadnetApiClient::TestConnection(){
 			Date: [Âðåìÿ ñåðâåðà]
 	ÎÑÒÀËÜÍÛÅ ÔÓÍÊÖÈÈ ÄÎÑÒÓÏÍÛ ÒÎËÜÊÎ ÏÎÑËÅ ÏÎËÓ×ÅÍÈß TOKEN
 */
-ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software){
+ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, UnicodeString Software,UnicodeString SoftwareVersion){
 	try{
 		TJSONObject *myjson = 0;
 		TStringStream *params = 0;
@@ -151,6 +152,7 @@ ApiResponse KadnetApiClient::Auth(UnicodeString Login, UnicodeString Password, U
 				myjson->AddPair("login",Login);
 				myjson->AddPair("password",Password);
 				myjson->AddPair("software",Software);
+				myjson->AddPair("clientVersion",SoftwareVersion);
 
 				TEncoding *LEncoding = NULL;
 				params = new TStringStream(myjson->ToString(),LEncoding->UTF8,false);
